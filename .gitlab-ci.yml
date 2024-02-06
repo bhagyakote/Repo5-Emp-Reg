@@ -29,6 +29,7 @@ sast:
 include:
    - template: Security/SAST.gitlab-ci.yml
    - template: Code-Quality.gitlab-ci.yml
+   - template: Jobs/Secret-Detection.gitlab-ci.yml
 
 code_quality:
   stage: test
@@ -41,6 +42,17 @@ code_quality:
     reports:
       codequality: gl-code-quality-report.json
   when: always
+
+secret_detection:
+  stage: test
+  tags:
+    - docker
+  variables:
+    SECRET_DETECTION_HISTORIC_SCAN: "true"
+  artifacts:
+    paths:
+      - gl-secret_detection-report.json
+
  
 
 
