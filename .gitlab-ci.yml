@@ -20,7 +20,7 @@ sast:
   tags:
     - docker
   artifacts:
-    name: sast
+  
     paths:
       - gl-sast-report.html
     reports:
@@ -28,6 +28,19 @@ sast:
 
 include:
    - template: Security/SAST.gitlab-ci.yml
+   - template: Code-Quality.gitlab-ci.yml
+
+code_quality:
+  stage: test
+  tags:
+    - docker
+  artifacts:
+    paths:
+      - gl-code-quality-report.json
+    reports:
+      codequality: gl-code-quality-report.json
+  when: always
+ 
 
 
 # deploy:
