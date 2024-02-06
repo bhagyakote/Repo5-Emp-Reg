@@ -9,8 +9,9 @@ stage1:
      - mvn clean install
      - pwd
      - whoami
+     - mkdir demo1
      - echo "do your build here"
  artifacts:
       paths: 
-          - target/*.war
+          - demo1/*.war
 
