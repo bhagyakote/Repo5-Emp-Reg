@@ -1,0 +1,12 @@
+stages:
+    - build
+    - test
+stage1:
+ stage: build
+ tags:
+     - shell
+ script:
+     - mvn clean install
+     - pwd
+     - whoami
+     - echo "do your build here"
