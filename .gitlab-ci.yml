@@ -10,3 +10,6 @@ stage1:
      - pwd
      - whoami
      - echo "do your build here"
+    artifacts:
+        path: src/target/*.war
+
