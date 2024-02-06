@@ -30,6 +30,7 @@ include:
    - template: Security/SAST.gitlab-ci.yml
    - template: Code-Quality.gitlab-ci.yml
    - template: Jobs/Secret-Detection.gitlab-ci.yml
+   - template: Jobs/Dependency-Scanning.gitlab-ci.yml
 
 code_quality:
   stage: test
@@ -52,6 +53,23 @@ secret_detection:
   artifacts:
     paths:
       - gl-secret_detection-report.json
+
+
+gemnasium-maven-dependency_scanning:
+  extends:
+    - .ds-analyzer
+    - .cyclonedx-reports
+  variables:
+    DS_ANALYZER_NAME: "gemnasium-maven"
+  stage: test
+  tags:
+    - docker
+  artifacts:
+    paths:
+     - gl-sbom-*.cdx.json
+     - gl-dependency-scanning-report.json
+    expire_in: never
+
 
  
 
