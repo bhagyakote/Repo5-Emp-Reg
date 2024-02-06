@@ -12,5 +12,5 @@ stage1:
      - echo "do your build here"
  artifacts:
       paths: 
-          - demo1/*.war
+          - target/*.war
 
