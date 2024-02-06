@@ -18,7 +18,7 @@ stage1:
 deploy:
   stage: deploy
   tags:
-  - test-demo
+  - shell_1
   environment: Production
     # - portalshell
   script:
