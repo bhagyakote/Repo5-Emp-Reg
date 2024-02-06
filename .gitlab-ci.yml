@@ -20,7 +20,7 @@ sast:
   tags:
     - docker
   artifacts:
-  
+    name: sast
     paths:
       - gl-sast-report.json
     reports:
@@ -35,6 +35,7 @@ code_quality:
   tags:
     - docker
   artifacts:
+    name: Code
     paths:
       - gl-code-quality-report.json
     reports:
