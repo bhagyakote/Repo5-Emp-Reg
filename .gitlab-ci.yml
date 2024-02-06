@@ -19,12 +19,12 @@ sast:
   stage: test
   tags:
     - docker_runner
-  artifacts:
-    name: sast
-    paths:
-      - gl-sast-report.json
-    reports:
-      sast: gl-sast-report.json
+  # # artifacts:
+  #   name: sast
+  #   paths:
+  #     - gl-sast-report.json
+  #   reports:
+  #     sast: gl-sast-report.json
 
 include:
    - template: Security/SAST.gitlab-ci.yml
