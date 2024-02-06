@@ -1,6 +1,6 @@
 stages:
     - build
-    - deploy
+    - test
 stage1:
  stage: build
  tags:
@@ -15,15 +15,30 @@ stage1:
       paths: 
           - target/*.war
 
-deploy:
-  stage: deploy
+sast:
+  stage: test
   tags:
-  - shell_1
-  environment: Production
-    # - portalshell
-  script:
-#    - cp path/to/your/war/file.war /path/to/tomcat/webapps/
-    - cp -r target/*.war /opt/tomcat/webapps
+    - docker_runner
+  artifacts:
+    name: sast
+    paths:
+      - gl-sast-report.json
+    reports:
+      sast: gl-sast-report.json
+
+include:
+   - template: Security/SAST.gitlab-ci.yml
+
+
+# deploy:
+#   stage: deploy
+#   tags:
+#   - shell_1
+#   environment: Production
+#     # - portalshell
+#   script:
+# #    - cp path/to/your/war/file.war /path/to/tomcat/webapps/
+#     - cp -r target/*.war /opt/tomcat/webapps
 
 
 
