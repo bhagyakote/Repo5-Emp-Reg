@@ -1,6 +1,6 @@
 stages:
     - build
-    - test
+    - deploy
 stage1:
  stage: build
  tags:
@@ -13,5 +13,17 @@ stage1:
      - echo "do your build here"
  artifacts:
       paths: 
-          - demo1/*.war
+          - target/*.war
+
+deploy:
+  stage: deploy
+  tags:
+  - test-demo
+  environment: Production
+    # - portalshell
+  script:
+#    - cp path/to/your/war/file.war /path/to/tomcat/webapps/
+    - cp -r target/*.war /opt/tomcat/webapps
+
+
 
