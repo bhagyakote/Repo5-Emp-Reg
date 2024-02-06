@@ -22,9 +22,9 @@ sast:
   artifacts:
     name: sast
     paths:
-      - gl-sast-report.json
+      - gl-sast-report.html
     reports:
-      sast: gl-sast-report.json
+      sast: gl-sast-report.html
 
 include:
    - template: Security/SAST.gitlab-ci.yml
