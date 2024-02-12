@@ -1,6 +1,7 @@
 stages:
     - build
     - test
+    - deploy
 stage1:
  stage: build
  tags:
@@ -71,18 +72,15 @@ gemnasium-maven-dependency_scanning:
     expire_in: never
 
 
- 
-
-
-# deploy:
-#   stage: deploy
-#   tags:
-#   - shell_1
-#   environment: Production
-#     # - portalshell
-#   script:
-# #    - cp path/to/your/war/file.war /path/to/tomcat/webapps/
-#     - cp -r target/*.war /opt/tomcat/webapps
+deploy:
+  stage: deploy
+  tags:
+   - shell_1
+  environment: Production
+    - portalshell
+  script:
+    - cp path/to/your/war/file.war /path/to/tomcat/webapps/
+    - cp -r target/*.war /opt/tomcat/webapps
 
 
 
