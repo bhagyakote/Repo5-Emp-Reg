@@ -75,7 +75,7 @@ gemnasium-maven-dependency_scanning:
 deploy:
   stage: deploy
   tags:
-   - shell_1
+   - docker
   environment: Production
     - portalshell
   script:
