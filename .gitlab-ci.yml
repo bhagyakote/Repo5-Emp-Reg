@@ -80,7 +80,7 @@ deploy:
   #   - portalshell
   script:
     # - cp /home/gitlab-runner/builds/bEzhoC-n/0/fineshift/users/bhagyashree-kote/employee-registration/target/studentapp-2.2-SNAPSHOT.war /opt/tomcat/webapps
-    - cp */*.war /opt/tomcat/webapps
+    - cp */*/studentapp-2.2-SNAPSHOT.war/opt/tomcat/webapps
 
 
 
