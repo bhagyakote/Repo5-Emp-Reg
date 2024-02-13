@@ -1,75 +1,75 @@
 stages:
-    # - build
-    # - test
+    - build
+    - test
     - deploy
-# stage1:
-#  stage: build
-#  tags:
-#      - shell_1
-#  script:
-#      - mvn clean install
-#      - pwd
-#      - whoami
-#      - mkdir demo1
-#      - echo "do your build here"
-#  artifacts:
-#       paths: 
-#           - target/*.war
+stage1:
+ stage: build
+ tags:
+     - shell_1
+ script:
+     - mvn clean install
+     - pwd
+     - whoami
+     - mkdir demo1
+     - echo "do your build here"
+ artifacts:
+      paths: 
+          - target/*.war
 
-# sast:
-#   stage: test
-#   tags:
-#     - docker
-#   artifacts:
-#     name: sast
-#     paths:
-#       - gl-sast-report.json
-#     reports:
-#       sast: gl-sast-report.json
+sast:
+  stage: test
+  tags:
+    - docker
+  artifacts:
+    name: sast
+    paths:
+      - gl-sast-report.json
+    reports:
+      sast: gl-sast-report.json
 
-# include:
-#    - template: Security/SAST.gitlab-ci.yml
-#    - template: Code-Quality.gitlab-ci.yml
-#    - template: Jobs/Secret-Detection.gitlab-ci.yml
-#    - template: Jobs/Dependency-Scanning.gitlab-ci.yml
+include:
+   - template: Security/SAST.gitlab-ci.yml
+   - template: Code-Quality.gitlab-ci.yml
+   - template: Jobs/Secret-Detection.gitlab-ci.yml
+   - template: Jobs/Dependency-Scanning.gitlab-ci.yml
 
-# code_quality:
-#   stage: test
-#   tags:
-#     - docker
-#   artifacts:
-#     name: Code
-#     paths:
-#       - gl-code-quality-report.json
-#     reports:
-#       codequality: gl-code-quality-report.json
-#   when: always
+code_quality:
+  stage: test
+  tags:
+    - docker
+  artifacts:
+    name: Code
+    paths:
+      - gl-code-quality-report.json
+    reports:
+      codequality: gl-code-quality-report.json
+  when: always
 
-# secret_detection:
-#   stage: test
-#   tags:
-#     - docker
-#   variables:
-#     SECRET_DETECTION_HISTORIC_SCAN: "true"
-#   artifacts:
-#     paths:
-#       - gl-secret_detection-report.json
+secret_detection:
+  stage: test
+  tags:
+    - docker
+  variables:
+    SECRET_DETECTION_HISTORIC_SCAN: "true"
+  artifacts:
+    paths:
+      - gl-secret_detection-report.json
 
 
-# gemnasium-maven-dependency_scanning:
-#   extends:
-#     - .ds-analyzer
-#     - .cyclonedx-reports
-#   variables:
-#     DS_ANALYZER_NAME: "gemnasium-maven"
-#   stage: test
-#   tags:
-#     - docker
-#   artifacts:
-#     paths:
-#      - gl-sbom-*.cdx.json
-#      - gl-dependency-scanning-report.json
-#     expire_in: never
+gemnasium-maven-dependency_scanning:
+  extends:
+    - .ds-analyzer
+    - .cyclonedx-reports
+  variables:
+    DS_ANALYZER_NAME: "gemnasium-maven"
+  stage: test
+  tags:
+    - docker
+  artifacts:
+    paths:
+     - gl-sbom-*.cdx.json
+     - gl-dependency-scanning-report.json
+    expire_in: never
 
 
 deploy:
@@ -79,8 +79,8 @@ deploy:
   # environment: Production
   #   - portalshell
   script:
-    # - cp /home/gitlab-runner/builds/bEzhoC-n/0/fineshift/users/bhagyashree-kote/employee-registration/target/studentapp-2.2-SNAPSHOT.war /opt/tomcat/webapps
-    - cp */*/studentapp-2.2-SNAPSHOT.war/opt/tomcat/webapps
+     - cp /home/gitlab-runner/builds/bEzhoC-n/0/fineshift/users/bhagyashree-kote/employee-registration/target/studentapp-2.2-SNAPSHOT.war /opt/tomcat/webapps
+    
 
 
 
