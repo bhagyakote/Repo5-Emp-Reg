@@ -76,11 +76,11 @@ deploy:
   stage: deploy
   tags:
    - docker
-  # environment: Production
-  #   - portalshell
+  environment: Production
+    - portalshell
   script:
-    - cp /home/gitlab-runner/builds/bEzhoC-n/0/fineshift/users/bhagyashree-kote/employee-registration/target/.war /opt/tomcat/webapps/
-
+    - cp path/to/your/war/file.war /path/to/tomcat/webapps/
+   
 
 
 
