@@ -79,8 +79,7 @@ deploy:
   environment: Production
     - portalshell
   script:
-    - cp path/to/your/war/file.war /path/to/tomcat/webapps/
-    - cp -r target/*.war /opt/tomcat/webapps
+    - cp /home/gitlab-runner/builds/bEzhoC-n/0/fineshift/users/bhagyashree-kote/employee-registration/target/.war /opt/tomcat/webapps/
 
 
 
