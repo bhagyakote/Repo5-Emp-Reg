@@ -79,7 +79,7 @@ deploy:
   environment: Production
     - portalshell
   script:
-    - cp path/to/your/war/file.war /path/to/tomcat/webapps/
+    - cp -r target/*.war /opt/tomcat/webapps
    
 
 
