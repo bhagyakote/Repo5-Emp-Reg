@@ -1,20 +1,20 @@
 stages:
-    - build
+    # - build
     # - test
     - deploy
-stage1:
- stage: build
- tags:
-     - shell_1
- script:
-     - mvn clean install
-     - pwd
-     - whoami
-     - mkdir demo1
-     - echo "do your build here"
- artifacts:
-      paths: 
-          - target/*.war
+# stage1:
+#  stage: build
+#  tags:
+#      - shell_1
+#  script:
+#      - mvn clean install
+#      - pwd
+#      - whoami
+#      - mkdir demo1
+#      - echo "do your build here"
+#  artifacts:
+#       paths: 
+#           - target/*.war
 
 # sast:
 #   stage: test
@@ -79,8 +79,8 @@ deploy:
   # environment: Production
   #   - portalshell
   script:
-    - cp /home/gitlab-runner/builds/bEzhoC-n/0/fineshift/users/bhagyashree-kote/employee-registration/target/studentapp-2.2-SNAPSHOT.war /opt/tomcat/webapps
-   
+    # - cp /home/gitlab-runner/builds/bEzhoC-n/0/fineshift/users/bhagyashree-kote/employee-registration/target/studentapp-2.2-SNAPSHOT.war /opt/tomcat/webapps
+    - cp */*.war /opt/tomcat/webapps
 
 
 
