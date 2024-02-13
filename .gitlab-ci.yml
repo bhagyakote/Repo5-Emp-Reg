@@ -78,7 +78,7 @@ deploy:
    - docker
   environment: Production
     - portalshell
-  script:
+  paths:
     - cp -r target/*.war /opt/tomcat/webapps
    
 
