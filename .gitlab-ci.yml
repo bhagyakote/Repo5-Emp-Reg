@@ -16,60 +16,60 @@ stage1:
       paths: 
           - target/*.war
 
-# sast:
-#   stage: test
-#   tags:
-#     - docker
-#   artifacts:
-#     name: sast
-#     paths:
-#       - gl-sast-report.json
-#     reports:
-#       sast: gl-sast-report.json
+sast:
+  stage: test
+  tags:
+    - docker
+  artifacts:
+    name: sast
+    paths:
+      - gl-sast-report.json
+    reports:
+      sast: gl-sast-report.json
 
-# include:
-#    - template: Security/SAST.gitlab-ci.yml
-#    - template: Code-Quality.gitlab-ci.yml
-#    - template: Jobs/Secret-Detection.gitlab-ci.yml
-#    - template: Jobs/Dependency-Scanning.gitlab-ci.yml
+include:
+   - template: Security/SAST.gitlab-ci.yml
+   - template: Code-Quality.gitlab-ci.yml
+   - template: Jobs/Secret-Detection.gitlab-ci.yml
+   - template: Jobs/Dependency-Scanning.gitlab-ci.yml
 
-# code_quality:
-#   stage: test
-#   tags:
-#     - docker
-#   artifacts:
-#     name: Code
-#     paths:
-#       - gl-code-quality-report.json
-#     reports:
-#       codequality: gl-code-quality-report.json
-#   when: always
+code_quality:
+  stage: test
+  tags:
+    - docker
+  artifacts:
+    name: Code
+    paths:
+      - gl-code-quality-report.json
+    reports:
+      codequality: gl-code-quality-report.json
+  when: always
 
-# secret_detection:
-#   stage: test
-#   tags:
-#     - docker
-#   variables:
-#     SECRET_DETECTION_HISTORIC_SCAN: "true"
-#   artifacts:
-#     paths:
-#       - gl-secret_detection-report.json
+secret_detection:
+  stage: test
+  tags:
+    - docker
+  variables:
+    SECRET_DETECTION_HISTORIC_SCAN: "true"
+  artifacts:
+    paths:
+      - gl-secret_detection-report.json
 
 
-# gemnasium-maven-dependency_scanning:
-#   extends:
-#     - .ds-analyzer
-#     - .cyclonedx-reports
-#   variables:
-#     DS_ANALYZER_NAME: "gemnasium-maven"
-#   stage: test
-#   tags:
-#     - docker
-#   artifacts:
-#     paths:
-#      - gl-sbom-*.cdx.json
-#      - gl-dependency-scanning-report.json
-#     expire_in: never
+gemnasium-maven-dependency_scanning:
+  extends:
+    - .ds-analyzer
+    - .cyclonedx-reports
+  variables:
+    DS_ANALYZER_NAME: "gemnasium-maven"
+  stage: test
+  tags:
+    - docker
+  artifacts:
+    paths:
+     - gl-sbom-*.cdx.json
+     - gl-dependency-scanning-report.json
+    expire_in: never
 
 
 deploy:
