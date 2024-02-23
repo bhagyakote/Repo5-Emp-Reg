@@ -79,7 +79,7 @@ deploy:
   # environment: Production
   #   - portalshell
   script:
-     - sudo cp /home/gitlab-runner/builds/bEzhoC-n/0/fineshift/users/bhagyashree-kote/employee-registration/target/*.war /opt/tomcat/webapps
+     - cp /home/gitlab-runner/builds/bEzhoC-n/0/fineshift/users/bhagyashree-kote/employee-registration/target/*.war /opt/tomcat/webapps
     
 
 
