@@ -5,7 +5,7 @@ stages:
 stage1:
  stage: build
  tags:
-     - shell_1
+     - shell-runner
  script:
      - mvn clean install
      - pwd
