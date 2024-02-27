@@ -19,7 +19,7 @@ stage1:
 sast:
   stage: test
   tags:
-    - docker
+    - docker-runner
   artifacts:
     name: sast
     paths:
@@ -36,7 +36,7 @@ include:
 code_quality:
   stage: test
   tags:
-    - docker
+    - docker-runner
   artifacts:
     name: Code
     paths:
@@ -48,7 +48,7 @@ code_quality:
 secret_detection:
   stage: test
   tags:
-    - docker
+    - docker-runner
   variables:
     SECRET_DETECTION_HISTORIC_SCAN: "true"
   artifacts:
@@ -64,7 +64,7 @@ gemnasium-maven-dependency_scanning:
     DS_ANALYZER_NAME: "gemnasium-maven"
   stage: test
   tags:
-    - docker
+    -docker-runner
   artifacts:
     paths:
      - gl-sbom-*.cdx.json
@@ -75,7 +75,7 @@ gemnasium-maven-dependency_scanning:
 deploy:
   stage: deploy
   tags:
-   - shell_1
+   - shell-runner
   # environment: Production
   #   - portalshell
   script:
