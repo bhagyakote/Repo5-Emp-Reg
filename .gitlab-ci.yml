@@ -64,7 +64,7 @@ gemnasium-maven-dependency_scanning:
     DS_ANALYZER_NAME: "gemnasium-maven"
   stage: test
   tags:
-    -docker-runner
+    - docker-runner
   artifacts:
     paths:
      - gl-sbom-*.cdx.json
