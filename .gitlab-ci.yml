@@ -9,77 +9,82 @@ stage1:
  script:
      - mvn clean install
      - pwd
-     - whoami
-     - mkdir demo1
+    #  - whoami
+    #  - mkdir demo1
      - echo "do your build here"
+     - docker login registry.gitlab.com
+     - docker build -t registry.gitlab.com/fineshift/users/bhagyashree-kote/employee-registration .
+     - docker push registry.gitlab.com/fineshift/users/bhagyashree-kote/employee-registration
+
  artifacts:
       paths: 
           - target/*.war
 
-sast:
-  stage: test
-  tags:
-    - docker-runner
-  artifacts:
-    name: sast
-    paths:
-      - gl-sast-report.json
-    reports:
-      sast: gl-sast-report.json
 
-include:
-   - template: Security/SAST.gitlab-ci.yml
-   - template: Code-Quality.gitlab-ci.yml
-   - template: Jobs/Secret-Detection.gitlab-ci.yml
-   - template: Jobs/Dependency-Scanning.gitlab-ci.yml
+# sast:
+#   stage: test
+#   tags:
+#     - docker-runner
+#   artifacts:
+#     name: sast
+#     paths:
+#       - gl-sast-report.json
+#     reports:
+#       sast: gl-sast-report.json
 
-code_quality:
-  stage: test
-  tags:
-    - docker-runner
-  artifacts:
-    name: Code
-    paths:
-      - gl-code-quality-report.json
-    reports:
-      codequality: gl-code-quality-report.json
-  when: always
+# include:
+#    - template: Security/SAST.gitlab-ci.yml
+#    - template: Code-Quality.gitlab-ci.yml
+#    - template: Jobs/Secret-Detection.gitlab-ci.yml
+#    - template: Jobs/Dependency-Scanning.gitlab-ci.yml
 
-secret_detection:
-  stage: test
-  tags:
-    - docker-runner
-  variables:
-    SECRET_DETECTION_HISTORIC_SCAN: "true"
-  artifacts:
-    paths:
-      - gl-secret_detection-report.json
+# code_quality:
+#   stage: test
+#   tags:
+#     - docker-runner
+#   artifacts:
+#     name: Code
+#     paths:
+#       - gl-code-quality-report.json
+#     reports:
+#       codequality: gl-code-quality-report.json
+#   when: always
 
-
-gemnasium-maven-dependency_scanning:
-  extends:
-    - .ds-analyzer
-    - .cyclonedx-reports
-  variables:
-    DS_ANALYZER_NAME: "gemnasium-maven"
-  stage: test
-  tags:
-    - docker-runner
-  artifacts:
-    paths:
-     - gl-sbom-*.cdx.json
-     - gl-dependency-scanning-report.json
-    expire_in: never
+# secret_detection:
+#   stage: test
+#   tags:
+#     - docker-runner
+#   variables:
+#     SECRET_DETECTION_HISTORIC_SCAN: "true"
+#   artifacts:
+#     paths:
+#       - gl-secret_detection-report.json
 
 
-deploy:
-  stage: deploy
-  tags:
-   - shell-runner
-  # environment: Production
-  #   - portalshell
-  script:
-     - cp /home/gitlab-runner/builds/bEzhoC-n/0/fineshift/users/bhagyashree-kote/employee-registration/target/*.war /opt/tomcat/webapps
+# gemnasium-maven-dependency_scanning:
+#   extends:
+#     - .ds-analyzer
+#     - .cyclonedx-reports
+#   variables:
+#     DS_ANALYZER_NAME: "gemnasium-maven"
+#   stage: test
+#   tags:
+#     - docker-runner
+#   artifacts:
+#     paths:
+#      - gl-sbom-*.cdx.json
+#      - gl-dependency-scanning-report.json
+#     expire_in: never
+
+
+# deploy:
+#   stage: deploy
+#   tags:
+#    - shell-runner
+#   # environment: Production
+#   #   - portalshell
+#   script:
+#      - cp /home/gitlab-runner/builds/bEzhoC-n/0/fineshift/users/bhagyashree-kote/employee-registration/target/*.war /opt/tomcat/webapps
     
 
 
